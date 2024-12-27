@@ -18,3 +18,15 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/forgot', [AuthController::class, 'forgot']);
 
 
+Rout::group(['middleware' => 'admin'], function () {
+
+});
+
+Rout::group(['middleware' => 'owner'], function () {
+
+});
+
+Rout::group(['middleware' => 'customor'], function () {
+
+});
+
