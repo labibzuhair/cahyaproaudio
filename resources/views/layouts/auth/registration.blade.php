@@ -4,8 +4,6 @@
 @section('title', 'Halaman Utama')
 
 @section('content')
-
-
     <div class="container">
         <div class="frame">
             <div class="nav">
@@ -16,22 +14,27 @@
                 </ul>
             </div>
             <div>
-                <form class="form-signin" action="{{ url('registration_post') }}" method="post">
+                <span style="color: yellow;">{{ $errors->first('email') }}</span>
+                <span style="color: red;">{{ $errors->first('password') }}</span>
+                <span style="color: red;">{{ $errors->first('confirm_password') }}</span>
+                @include('layouts.auth._message')
+                <form class="form-signin" action="{{ route('registration_post') }}" method="post">
                     @csrf
                     <label for="fullname">Full name</label>
-                    <input class="form-styling" type="text" name="fullname" placeholder=""
-                        value="{{ old('fullname') }}" />
+                    <input class="form-styling" type="text" name="name" placeholder="" value="{{ old('name') }}"
+                        required />
                     <label for="email">Email</label>
-                    <input class="form-styling" type="text" name="email" placeholder="" value="{{ old('email') }}" />
+                    <input class="form-styling" type="text" name="email" placeholder="" value="{{ old('email') }}"
+                        required />
                     <label for="password">Password</label>
-                    <input class="form-styling" type="text" name="password" placeholder="" />
+                    <input class="form-styling" type="text" name="password" placeholder="" required />
                     <label for="confirmpassword">Confirm password</label>
-                    <input class="form-styling" type="text" name="confirmpassword" placeholder="" />
-                    <select class="form-select" aria-label="Default select example" name="is_role">
+                    <input class="form-styling" type="text" name="confirm_password" placeholder="" required />
+                    <select class="form-select" aria-label="Default select example" name="is_role" required>
                         <option selected>Pilih role anda</option>
-                        <option value="admin">admin</option>
-                        <option value="owner">owner</option>
-                        <option value="customor">customor</option>
+                        <option {{ old('is_role') == 'admin' ? 'selected' : '' }} value="admin">admin</option>
+                        <option {{ old('is_role') == 'owner' ? 'selected' : '' }} value="owner">owner</option>
+                        <option {{ old('is_role') == 'customor' ? 'selected' : '' }} value="customor">customor</option>
                     </select>
                     <button type="submit" class="btn btn-primary btn-signup">Daftar</button>
                 </form>
@@ -43,11 +46,11 @@
                 viewBox="0 0 322.447 322.447" style="enable-background:new 0 0 322.447 322.447;" xml:space="preserve">
                 <path
                     d="M321.832,230.327c-2.133-6.565-9.184-10.154-15.75-8.025l-16.254,5.281C299.785,206.991,305,184.347,305,161.224
-                                                                                              c0-84.089-68.41-152.5-152.5-152.5C68.411,8.724,0,77.135,0,161.224s68.411,152.5,152.5,152.5c6.903,0,12.5-5.597,12.5-12.5
-                                                                                              c0-6.902-5.597-12.5-12.5-12.5c-70.304,0-127.5-57.195-127.5-127.5c0-70.304,57.196-127.5,127.5-127.5
-                                                                                              c70.305,0,127.5,57.196,127.5,127.5c0,19.372-4.371,38.337-12.723,55.568l-5.553-17.096c-2.133-6.564-9.186-10.156-15.75-8.025
-                                                                                              c-6.566,2.134-10.16,9.186-8.027,15.751l14.74,45.368c1.715,5.283,6.615,8.642,11.885,8.642c1.279,0,2.582-0.198,3.865-0.614
-                                                                                              l45.369-14.738C320.371,243.946,323.965,236.895,321.832,230.327z" />
+                                                                                                                                              c0-84.089-68.41-152.5-152.5-152.5C68.411,8.724,0,77.135,0,161.224s68.411,152.5,152.5,152.5c6.903,0,12.5-5.597,12.5-12.5
+                                                                                                                                              c0-6.902-5.597-12.5-12.5-12.5c-70.304,0-127.5-57.195-127.5-127.5c0-70.304,57.196-127.5,127.5-127.5
+                                                                                                                                              c70.305,0,127.5,57.196,127.5,127.5c0,19.372-4.371,38.337-12.723,55.568l-5.553-17.096c-2.133-6.564-9.186-10.156-15.75-8.025
+                                                                                                                                              c-6.566,2.134-10.16,9.186-8.027,15.751l14.74,45.368c1.715,5.283,6.615,8.642,11.885,8.642c1.279,0,2.582-0.198,3.865-0.614
+                                                                                                                                              l45.369-14.738C320.371,243.946,323.965,236.895,321.832,230.327z" />
             </svg>
         </a>
     </div>
