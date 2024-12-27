@@ -14,12 +14,18 @@ class AuthController extends Controller
     {
         dd($request->all());
     }
+
+
     public function login()
     {
         return view('layouts/auth/login');
     }
+
+
     public function forgot()
     {
         return view('layouts/auth/forgot');
     }
+
+
 }
