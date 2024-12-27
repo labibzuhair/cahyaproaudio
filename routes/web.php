@@ -14,19 +14,23 @@ Route::get('/registration', [AuthController::class, 'registration']);
 Route::post('/registration_post', [AuthController::class, 'registration_post'])->name('registration_post');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login_post', [AuthController::class, 'login_post'])->name('login_post');
 
 Route::get('/forgot', [AuthController::class, 'forgot']);
 
 
-Rout::group(['middleware' => 'admin'], function () {
+// Grup rute untuk admin
+Route::group(['middleware' => 'admin', 'name' => 'admin'], function () {
+    Route::get('/beranda', [AdminController::class, 'beranda'])->name('beranda');
 
 });
 
-Rout::group(['middleware' => 'owner'], function () {
-
+// Grup rute untuk owner
+Route::group(['middleware' => 'owner', 'name' => 'owner'], function () {
+    Route::get('/beranda', [OwnerController::class, 'beranda'])->name('beranda');
 });
 
-Rout::group(['middleware' => 'customor'], function () {
-
+// Grup rute untuk customer
+Route::group(['middleware' => 'customer', 'name' => 'customer'], function () {
+    Route::get('/beranda', [CustomerController::class, 'beranda'])->name('beranda');
 });
-

@@ -3,7 +3,7 @@
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\OwnerMiddleware;
-use App\Http\Middleware\CustomorMiddleware;
+use App\Http\Middleware\CustomerMiddleware;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
@@ -17,7 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => AdminMiddleware::class,
             'owner' => OwnerMiddleware::class,
-            'customor' => CustomorMiddleware::class,
+            'customer' => CustomerMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

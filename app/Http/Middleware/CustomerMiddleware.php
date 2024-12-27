@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use auth;
 
 
-class CustomorMiddleware
+class CustomerMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class CustomorMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {
-            if (Auth::user()->is_role == 'customor') {
+            if (Auth::user()->is_role == 'customer') {
                 return $next($request);
             } else {
                 Auth::logout();
