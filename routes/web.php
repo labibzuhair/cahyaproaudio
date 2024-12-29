@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\BerandaController;
 
 // Route::get('/', function () {
@@ -27,6 +28,11 @@ Route::get('/logout', [AuthController::class, 'logout']);
 // Grup rute untuk admin
 Route::group(['middleware' => 'admin', 'name' => 'admin'], function () {
     Route::get('/admin/beranda', [BerandaController::class, 'beranda'])->name('admin/beranda');
+
+    Route::get('/admin/produks', [ProdukController::class, 'index'])->name('produks');
+    Route::get('/admin/produks/create', [ProdukController::class, 'create'])->name('produks.create');
+    Route::post('/admin/produks', [ProdukController::class, 'store'])->name('produks.store');
+
 
 });
 

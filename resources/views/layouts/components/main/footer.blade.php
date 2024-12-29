@@ -4,19 +4,22 @@
             <div class="row align-items-center">
                 <div class="col-md-3 col-sm-6 my-3">
                     <a href="#!"><img class="img-fluid img-brand d-block mx-auto"
-                            src="assets/img/logos/microsoft.svg" alt="..." aria-label="Microsoft Logo" /></a>
-                </div>
-                <div class="col-md-3 col-sm-6 my-3">
-                    <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/google.svg"
-                            alt="..." aria-label="Google Logo" /></a>
+                            src="{{ asset('assets/img/logos/microsoft.svg') }}" alt="..."
+                            aria-label="Microsoft Logo" /></a>
                 </div>
                 <div class="col-md-3 col-sm-6 my-3">
                     <a href="#!"><img class="img-fluid img-brand d-block mx-auto"
-                            src="assets/img/logos/facebook.svg" alt="..." aria-label="Facebook Logo" /></a>
+                            src="{{ asset('assets/img/logos/google.svg') }}" alt="..."
+                            aria-label="Google Logo" /></a>
                 </div>
                 <div class="col-md-3 col-sm-6 my-3">
-                    <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/ibm.svg"
-                            alt="..." aria-label="IBM Logo" /></a>
+                    <a href="#!"><img class="img-fluid img-brand d-block mx-auto"
+                            src="{{ asset('assets/img/logos/facebook.svg') }}" alt="..."
+                            aria-label="Facebook Logo" /></a>
+                </div>
+                <div class="col-md-3 col-sm-6 my-3">
+                    <a href="#!"><img class="img-fluid img-brand d-block mx-auto"
+                            src="{{ asset('assets/img/logos/ibm.svg') }}" alt="..." aria-label="IBM Logo" /></a>
                 </div>
             </div>
         </div>
@@ -90,8 +93,8 @@
                     <div class="text-center text-danger mb-3">Error sending message!</div>
                 </div>
                 <!-- Submit Button-->
-                <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton"
-                        type="submit">Send Message</button></div>
+                <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled"
+                        id="submitButton" type="submit">Send Message</button></div>
             </form>
         </div>
     </section>

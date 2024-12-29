@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -17,6 +16,7 @@ return new class extends Migration
             $table->text('description');  // Deskripsi produk
             $table->decimal('price', 8, 2);  // Harga produk
             $table->enum('type', ['sound', 'tenda', 'dekorasi']);  // Jenis produk
+            $table->integer('stock');
             $table->string('photo_main');
             $table->string('photo_1')->nullable();
             $table->string('photo_2')->nullable();

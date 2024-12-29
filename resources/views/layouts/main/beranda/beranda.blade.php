@@ -8,10 +8,21 @@
     <!-- Masthead-->
     <header class="masthead">
         <div class="container">
-            <div class="masthead-subheading">Slamat datang di Studio CAHYA PRO AUDIO OFFICIAL</div>
-            <div class="masthead-heading text-uppercase">Senang Bertemu Anda!!</div>
+            @auth
+                @if (Auth::user()->is_role == 'customer')
+                    <div class="masthead-subheading">Halo {{ $getRecord->name }}!! Selamat datang di Studio CAHYA PRO AUDIO
+                        OFFICIAL</div>
+                @else
+                    <div class="masthead-subheading">Selamat datang di Studio CAHYA PRO AUDIO OFFICIAL</div>
+                @endif
+            @else
+                <div class="masthead-subheading">Selamat datang di Studio CAHYA PRO AUDIO OFFICIAL</div>
+            @endauth
+            <div class="masthead-heading text-uppercase">Senang Bekerja Sama Dengan Anda!!</div>
             <a class="btn btn-primary btn-xl text-uppercase" href="#services">Pelayanan Kami</a>
         </div>
+
+
     </header>
     <!-- Services-->
     {{--
@@ -32,6 +43,24 @@
         @endforeach
     </div> --}}
 
+    <div class="container">
+        <h1>Produk Kami</h1>
+        <div class="row">
+            @foreach ($produks as $produk)
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm"> <img src="{{ asset('storage/' . $produk->photo_main) }}"
+                            class="card-img-top" alt="{{ $produk->name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $produk->name }}</h5>
+                            <p class="card-text">{{ $produk->description }}</p>
+                            <p class="card-text">Harga: Rp {{ number_format($produk->price, 0, ',', '.') }}</p> <a
+                                href="#" class="btn btn-primary">Detail</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
     <section class="page-section" id="services">
         <div class="container">
             <div class="text-center">
@@ -91,7 +120,7 @@
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/1.jpg" alt="..." />
+                            <img class="img-fluid" src="{{ asset('assets/img/portfolio/1.jpg') }}" alt="..." />
                         </a>
                         <div class="portfolio-caption">
                             <div class="portfolio-caption-heading">Threads</div>
@@ -106,7 +135,7 @@
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/2.jpg" alt="..." />
+                            <img class="img-fluid" src="{{ asset('assets/img/portfolio/2.jpg') }}" alt="..." />
                         </a>
                         <div class="portfolio-caption">
                             <div class="portfolio-caption-heading">Explore</div>
@@ -121,7 +150,7 @@
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/3.jpg" alt="..." />
+                            <img class="img-fluid" src="{{ asset('assets/img/portfolio/3.jpg') }}" alt="..." />
                         </a>
                         <div class="portfolio-caption">
                             <div class="portfolio-caption-heading">Finish</div>
@@ -136,7 +165,7 @@
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/4.jpg" alt="..." />
+                            <img class="img-fluid" src="{{ asset('assets/img/portfolio/4.jpg') }}" alt="..." />
                         </a>
                         <div class="portfolio-caption">
                             <div class="portfolio-caption-heading">Lines</div>
@@ -151,7 +180,7 @@
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/5.jpg" alt="..." />
+                            <img class="img-fluid" src="{{ asset('assets/img/portfolio/5.jpg') }}" alt="..." />
                         </a>
                         <div class="portfolio-caption">
                             <div class="portfolio-caption-heading">Southwest</div>
@@ -166,7 +195,7 @@
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/6.jpg" alt="..." />
+                            <img class="img-fluid" src="{{ asset('assets/img/portfolio/6.jpg') }}" alt="..." />
                         </a>
                         <div class="portfolio-caption">
                             <div class="portfolio-caption-heading">Window</div>
@@ -322,8 +351,9 @@
     <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
-                        alt="Close modal" /></div>
+                <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('assets/img/close-icon.svg') }}"
+                        alt="Close modal" />
+                </div>
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
@@ -331,7 +361,8 @@
                                 <!-- Project details-->
                                 <h2 class="text-uppercase">Project Name</h2>
                                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/1.jpg" alt="..." />
+                                <img class="img-fluid d-block mx-auto" src="{{ asset('assets/img/portfolio/1.jpg') }}"
+                                    alt="..." />
                                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
                                     repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
@@ -362,8 +393,9 @@
     <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
-                        alt="Close modal" /></div>
+                <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('assets/img/close-icon.svg') }}"
+                        alt="Close modal" />
+                </div>
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
@@ -371,7 +403,8 @@
                                 <!-- Project details-->
                                 <h2 class="text-uppercase">Project Name</h2>
                                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/2.jpg" alt="..." />
+                                <img class="img-fluid d-block mx-auto" src="{{ asset('assets/img/portfolio/2.jpg') }}"
+                                    alt="..." />
                                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
                                     repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
@@ -402,7 +435,7 @@
     <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
+                <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('assets/img/close-icon.svg') }}"
                         alt="Close modal" /></div>
                 <div class="container">
                     <div class="row justify-content-center">
@@ -411,7 +444,8 @@
                                 <!-- Project details-->
                                 <h2 class="text-uppercase">Project Name</h2>
                                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/3.jpg" alt="..." />
+                                <img class="img-fluid d-block mx-auto" src="{{ asset('assets/img/portfolio/3.jpg') }}"
+                                    alt="..." />
                                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
                                     repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
@@ -442,7 +476,7 @@
     <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
+                <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('assets/img/close-icon.svg') }}"
                         alt="Close modal" /></div>
                 <div class="container">
                     <div class="row justify-content-center">
@@ -451,7 +485,8 @@
                                 <!-- Project details-->
                                 <h2 class="text-uppercase">Project Name</h2>
                                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/4.jpg" alt="..." />
+                                <img class="img-fluid d-block mx-auto" src="{{ asset('assets/img/portfolio/4.jpg') }}"
+                                    alt="..." />
                                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
                                     repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
@@ -482,7 +517,7 @@
     <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
+                <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('assets/img/close-icon.svg') }}"
                         alt="Close modal" /></div>
                 <div class="container">
                     <div class="row justify-content-center">
@@ -491,7 +526,8 @@
                                 <!-- Project details-->
                                 <h2 class="text-uppercase">Project Name</h2>
                                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/5.jpg" alt="..." />
+                                <img class="img-fluid d-block mx-auto" src="{{ asset('assets/img/portfolio/5.jpg') }}"
+                                    alt="..." />
                                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
                                     repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
@@ -522,7 +558,7 @@
     <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg"
+                <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('assets/img/close-icon.svg') }}"
                         alt="Close modal" /></div>
                 <div class="container">
                     <div class="row justify-content-center">
@@ -531,7 +567,8 @@
                                 <!-- Project details-->
                                 <h2 class="text-uppercase">Project Name</h2>
                                 <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/6.jpg" alt="..." />
+                                <img class="img-fluid d-block mx-auto" src="{{ asset('assets/img/portfolio/6.jpg') }}"
+                                    alt="..." />
                                 <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
                                     adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
                                     repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,

@@ -12,7 +12,9 @@ class produk extends Model
     protected $fillable = [
         'name',
         'description',
-        'category',
+        'price',
+        'type',
+        'stock',
         'photo_main',
         'photo_1',
         'photo_2',
