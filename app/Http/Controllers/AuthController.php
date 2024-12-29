@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Mail\ForgotPasswordMail;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\ResetPassword;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 
 
 class AuthController extends Controller
@@ -45,17 +48,11 @@ class AuthController extends Controller
         // dd($request->all());
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true)) {
             if (Auth::User()->is_role == 'admin') {
-                echo "Admin";
-                die();
-                // return redirect()->intended('layouts.admin.beranda.beranda');
+                return redirect()->intended('admin/beranda');
             } else if (Auth::User()->is_role == 'owner') {
-                echo "owner";
-                die();
-                // return redirect()->intended('layouts.owner.beranda.beranda');
+                return redirect()->intended('owner/beranda');
             } else if (Auth::User()->is_role == 'customer') {
-                echo "customer";
-                die();
-                // return redirect()->intended('layouts.main.beranda.beranda');
+                return redirect()->intended('customer/beranda');
             } else {
                 return redirect('login')->with('error', 'please enter the correct credentials');
             }
@@ -72,5 +69,52 @@ class AuthController extends Controller
     public function forgot()
     {
         return view('layouts/auth/forgot');
+    }
+    public function forgot_post(Request $request)
+    {
+        // dd($request->all());
+        $count = User::where('email', '=', $request->email)->count();
+        if ($count > 0) {
+            $user = User::where('email', '=', $request->email)->first();
+            $user->remember_token = Str::random(50);
+            $user->save();
+            Mail::to($user->email)->send(new \App\Mail\ForgotPasswordMail($user));
+            return redirect()->back()->with('success', 'password has been rest');
+        } else {
+            return redirect()->back()->with('error', 'Email not found in the system');
+        }
+
+    }
+    public function getReset(Request $request, $token)
+    {
+        // dd($token);
+        $user = User::where('remember_token', '=', $token);
+        if ($user->count() == 0) {
+            abort(403);
+        }
+
+        $user = $user->first();
+        $data['token'] = $token;
+
+        return view('layouts.auth.reset', $data);
+    }
+    public function postReset($token, ResetPassword $request)
+    {
+        $user = User::where('remember_token', '=', $token)->first();
+        if (!$user) {
+            abort(403);
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->remember_token = Str::random(50);
+        $user->save();
+
+        return redirect('login')->with('success', 'successfully password reset');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('login');
     }
 }

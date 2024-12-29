@@ -22,7 +22,7 @@
 
 <body id="page-top">
 
-    {{-- @include('layouts.components.main.navbar') --}}
+    @include('layouts.components.main.navbar')
 
 
     <main class="container-fluid p-0">
